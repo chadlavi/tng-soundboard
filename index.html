@@ -99,8 +99,25 @@
         flex-basis: 100%;
       }
     }
+    @supports (-webkit-touch-callout: none) {
+      .button-row {
+        display: none;
+      }
+    }
   </style>
   <script>
+    const iOS = () => {
+      return [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+      ].includes(navigator.platform)
+      // iPad on iOS 13 detection
+      || (navigator.userAgent.includes('Mac') && 'ontouchend' in document)
+    }
     const isZoom = () => localStorage.getItem('zoomVol') === 'true'
     const setZoom = (zoom) => localStorage.setItem('zoomVol', zoom ? 'true' : 'false')
 
@@ -136,8 +153,10 @@
     }
 
     const setItems = () => {
-      setToggleButtonContent()
-      setVolumes(isZoom())
+      if (!iOS()) {
+        setToggleButtonContent()
+        setVolumes(isZoom())
+      }
       const items = document.querySelectorAll('.item')
       items.forEach(i => {
         const audio = i.querySelector('audio')
