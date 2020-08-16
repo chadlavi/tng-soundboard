@@ -99,10 +99,8 @@
         flex-basis: 100%;
       }
     }
-    @supports (-webkit-touch-callout: none) {
-      .button-row {
-        display: none;
-      }
+    .hide {
+      display: none;
     }
   </style>
   <script>
@@ -156,6 +154,8 @@
       if (!iOS()) {
         setToggleButtonContent()
         setVolumes(isZoom())
+      } else {
+        document.querySelector('.button-row').classList.add('hide')
       }
       const items = document.querySelectorAll('.item')
       items.forEach(i => {
