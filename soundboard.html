@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TNG Sounds</title>
+  </head>
+  <style>
+    :root {
+      --background: white;
+      --color: black;
+      --item: rgb(202, 218, 251);
+    }
+    @media (prefers-color-scheme:dark) {
+      :root {
+        --background: rgb(20, 20, 20);
+        --color: white;
+        --item: rgb(59, 80, 122);
+      }
+    }
+    * {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    body {
+      background: var(--background);
+      color: var(--color);
+      margin: 0 64px;
+      margin-block-end: 128px;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .section {
+      width: 100%;
+      margin-bottom: 32px;
+    }
+    .section > h2 {
+      margin-left: 8px;
+    }
+    .item {
+      margin: 8px;
+      border-radius: 16px;
+      padding: 16px;
+      background: var(--item);
+      box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.25);
+    }
+    .item[role=button] {
+      cursor: pointer;
+    }
+    .item h3 {
+      margin-top: 0;
+    }
+    .item audio {
+      width: calc(calc(100vw - 128px) / 3 - 48px);
+    }
+  </style>
+  <script>
+    const volSet = () => {
+      const items = document.querySelectorAll('.item')
+      items.forEach(i => {
+        const audio = i.querySelector('audio')
+        if (audio) {
+          i.setAttribute('role', 'button')
+          if (audio.dataset.vol === 'quiet') {
+            audio.volume = 0.03
+          } else {
+            audio.volume = 0.1
+          }
+          i.onclick = (e) => {
+            if (e.target !== audio) {
+              if (!audio.paused) {
+                audio.pause()
+              } else {
+                audio.play()
+              }
+            }
+          }
+        }
+      })
+    }
+    window.onload = volSet
+  </script>
+  <body>
+    <h1>TNG Sounds 👽🚀🧑‍🚀</h1>
+    <div class="grid">
+
+      <div class="section">
+        <h2>Background loops 🔁</h2>
+        <div class="grid">
+          <div class="item">
+            <h3>bridge 1</h3>
+            <audio data-vol="quiet" type="audio/mpeg" loop controls>
+              <source src="./sounds/tng_bridge_1.mp3">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>bridge 2</h3>
+            <audio data-vol="quiet" loop controls>
+              <source src="./sounds/tng_bridge_2.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Alerts 🚨</h2>
+        <div class="grid">
+          <div class="item">
+            <h3>alert</h3>
+            <audio controls>
+              <source src="./sounds/alert06.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>intruder alert deck 8</h3>
+            <audio controls>
+              <source src="./sounds/intruderalertdeck8_ep.mp3"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>auto pilot not working</h3>
+            <audio controls>
+              <source src="./sounds/autopilotnotfunctional.mp3"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Answers 🤔</h2>
+        <div class="section grid">
+          <div class="item">
+            <h3>affirmative 1</h3>
+            <audio controls>
+              <source src="./sounds/affirmative1_ep.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>affirmative 2</h3>
+            <audio controls>
+              <source src="./sounds/affirmative2_ep.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+        <div class="section grid">
+          <div class="item">
+            <h3>direction unclear, please repeat</h3>
+            <audio controls>
+              <source src="./sounds/directionunclearpleaserepeat_clean.mp3"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+        <div class="section grid">
+          <div class="item">
+            <h3>don't sass computer</h3>
+            <audio controls>
+              <source src="./sounds/donotaddressthisunitinthatmanner_clean.mp3"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>incorrect</h3>
+            <audio controls>
+              <source src="./sounds/tos_incorrect_ep.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>negative</h3>
+            <audio controls>
+              <source src="./sounds/tos_negative_ep.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Auto destruct 💥</h2>
+        <div class="grid">
+          <div class="item">
+            <h3>auto destruct armed</h3>
+            <audio controls>
+              <source src="./sounds/autodestructsequencearmed_ep.mp3"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>1min to self destruct</h3>
+            <audio controls>
+              <source src="./sounds/oneminutetoautodestruct_ep.mp3"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Beeps and pews 🔫🤖</h2>
+        <div class="grid">
+          <div class="item">
+            <h3>alert</h3>
+            <audio controls>
+              <source src="./sounds/alert06.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>processing</h3>
+            <audio controls>
+              <source src="./sounds/processing.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>pew!</h3>
+            <audio controls>
+              <source src="./sounds/tng_disruptor_clean.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      </div class="item">
+      <div class="section">
+        <h2>Denied ⛔️</h2>
+        <div class="grid">
+          <div class="item">
+            <h3>deny beep</h3>
+            <audio controls>
+              <source src="./sounds/denybeep1.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>lvl 9 auth required</h3>
+            <audio controls>
+              <source src="./sounds/levelnineauthorizationrequired_ep.mp3"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+          <div class="item">
+            <h3>you are not auth to access this facility</h3>
+            <audio controls>
+              <source
+              src="./sounds/youarenotauthorisedtoaccessthisfacility_clean.mp3"
+              type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
