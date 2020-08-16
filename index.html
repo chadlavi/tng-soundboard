@@ -19,11 +19,25 @@
     * {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
+    *:focus {
+      outline-color: var(--item);
+    }
     body {
       background: var(--background);
       color: var(--color);
       margin: 0 64px;
       margin-block-end: 128px;
+    }
+    .button-row {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .button-row button {
+      background: var(--item);
+      border-radius: 16px;
+      border: none;
+      padding: 8px 16px;
+      font-size: 1em;
     }
     .grid {
       display: flex;
@@ -54,17 +68,48 @@
     }
   </style>
   <script>
-    const volSet = () => {
+    const isZoom = () => localStorage.getItem('zoomVol') === 'true'
+    const setZoom = (zoom) => localStorage.setItem('zoomVol', zoom ? 'true' : 'false')
+
+    const setToggleButtonContent = () => {
+      const zoomVolToggleButton = document.querySelector('button#zoom-vol-toggle')
+      if (isZoom()) {
+        zoomVolToggleButton.innerHTML = "Set volumes back to normal 🔊"
+      } else {
+        zoomVolToggleButton.innerHTML = "Set volumes low for Zoom sharing 🔇"
+      }
+    }
+
+    const setVolumes = (zoom) => {
+      const audios = document.querySelectorAll('audio')
+      audios.forEach(a => {
+        if (zoom) {
+          setZoom(true)
+          if (a.dataset.vol === 'quiet') {
+            a.volume = 0.03
+          } else {
+            a.volume = 0.1
+          }
+        } else {
+          a.volume = 1
+        }
+      })
+    }
+
+    const zoomVolToggle = () => {
+      setZoom(!isZoom())
+      setToggleButtonContent()
+      setVolumes(isZoom())
+    }
+
+    const setItems = () => {
+      setToggleButtonContent()
+      setVolumes(isZoom())
       const items = document.querySelectorAll('.item')
       items.forEach(i => {
         const audio = i.querySelector('audio')
         if (audio) {
           i.setAttribute('role', 'button')
-          if (audio.dataset.vol === 'quiet') {
-            audio.volume = 0.03
-          } else {
-            audio.volume = 0.1
-          }
           i.onclick = (e) => {
             if (e.target !== audio) {
               if (!audio.paused) {
@@ -77,10 +122,13 @@
         }
       })
     }
-    window.onload = volSet
+    window.onload = setItems
   </script>
   <body>
     <h1>TNG Sounds 👽🚀🧑‍🚀</h1>
+    <div class="button-row">
+      <button id="zoom-vol-toggle" onclick="zoomVolToggle();">...</button>
+    </div>
     <div class="grid">
 
       <div class="section">
